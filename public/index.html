@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Nexus AI · 6 IAs</title>
+    <style>
+        body { background: #07090d; color: #e4f0ff; font-family: sans-serif; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        input, button, textarea { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #243040; background: #0d1117; color: white; }
+        button { background: #00c8ff; color: black; font-weight: bold; cursor: pointer; }
+        .chat-box { border: 1px solid #181f2a; padding: 15px; min-height: 200px; background: #0d1117; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nexus AI · Consenso</h1>
+        <input type="password" id="keyAnthropic" placeholder="Chave Anthropic (Claude)">
+        <input type="password" id="keyGemini" placeholder="Chave Gemini">
+        <textarea id="pergunta" placeholder="Digite sua pergunta para o debate..."></textarea>
+        <button onclick="iniciarDebate()">Iniciar Debate das IAs</button>
+        <div id="status"></div>
+        <div class="chat-box" id="arena"></div>
+    </div>
+
+    <script>
+        async function chamarIA(api, system, prompt) {
+            const endpoint = api === 'claude' ? '/api/anthropic' : '/api/gemini';
+            const headers = api === 'claude' 
+                ? { 'x-api-key': document.getElementById('keyAnthropic').value }
+                : { 'x-goog-api-key': document.getElementById('keyGemini').value };
+
+            const body = api === 'claude'
+                ? { model: "claude-3-haiku-20240307", max_tokens: 1024, system, messages: [{role: "user", content: prompt}] }
+                : { contents: [{ parts: [{ text: system + "\n\n" + prompt }] }] };
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', ...headers },
+                body: JSON.stringify(body)
+            });
+            return response.json();
+        }
+
+        async function iniciarDebate() {
+            const p = document.getElementById('pergunta').value;
+            const arena = document.getElementById('arena');
+            arena.innerHTML = "<b>Iniciando debate entre as IAs...</b><br>";
+            
+            try {
+                // Exemplo simplificado de uma rodada
+                const res = await chamarIA('gemini', 'Você é um debatedor técnico.', p);
+                const texto = res.candidates?.[0]?.content?.parts?.[0]?.text || "Erro na resposta";
+                arena.innerHTML += `<p><b>Gemini:</b> ${texto}</p>`;
+            } catch (e) {
+                arena.innerHTML += `<p style="color:red">Erro: ${e.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
