@@ -14,73 +14,73 @@
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--text);font-family:'DM Mono',monospace;min-height:100vh;overflow-x:hidden}
-  
-  /* Background Grid Effect do Original */
   body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,200,255,.03) 1px, transparent 1px),linear-gradient(90deg, rgba(0,200,255,.03) 1px, transparent 1px);background-size:30px 30px;pointer-events:none;z-index:0}
 
-  header{padding:40px 20px;border-bottom:1px solid var(--border);background:rgba(13,17,23,0.8);backdrop-filter:blur(10px);position:sticky;top:0;z-index:100}
-  .header-content{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
-  h1{font-family:'Syne',sans-serif;font-weight:800;font-size:24px;color:var(--text-bright);letter-spacing:-1px}
+  header{padding:30px 20px;border-bottom:1px solid var(--border);background:rgba(13,17,23,0.8);backdrop-filter:blur(10px);position:sticky;top:0;z-index:100}
+  .header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+  h1{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--text-bright);letter-spacing:-1px}
   h1 span{color:var(--athena)}
 
-  .setup-section{max-width:1000px;margin:20px auto;padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:15px}
-  .api-field{background:var(--surface);border:1px solid var(--border);padding:12px;border-radius:4px}
-  .api-field label{display:block;font-size:9px;color:var(--text-dim);text-transform:uppercase;margin-bottom:5px}
-  .api-field input{width:100%;background:transparent;border:none;color:var(--text-bright);outline:none;font-family:'DM Mono'}
+  .api-keys-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;max-width:1200px;margin:20px auto;padding:0 20px}
+  .key-box{background:var(--surface);border:1px solid var(--border);padding:12px;border-radius:4px}
+  .key-box label{display:block;font-size:9px;color:var(--text-dim);text-transform:uppercase;margin-bottom:6px}
+  .key-box input{width:100%;background:transparent;border:none;color:var(--athena);outline:none;font-family:'DM Mono';font-size:13px}
 
   main{max-width:1000px;margin:20px auto;padding:0 20px 100px;position:relative;z-index:1}
+  .input-wrapper{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:25px;margin-bottom:40px;box-shadow:0 20px 50px rgba(0,0,0,0.4)}
+  textarea{width:100%;background:transparent;border:none;color:var(--text-bright);font-family:'DM Mono';font-size:18px;resize:none;min-height:120px;outline:none;line-height:1.5}
   
-  .input-area{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:25px;margin-bottom:40px;box-shadow:0 10px 30px rgba(0,0,0,0.5)}
-  textarea{width:100%;background:transparent;border:none;color:var(--text-bright);font-family:'DM Mono';font-size:18px;resize:none;min-height:120px;outline:none}
-  
-  .actions{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
-  button{background:var(--athena);color:#000;border:none;padding:14px 35px;font-family:'Syne';font-weight:800;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:0.3s}
-  button:hover{background:#5cdfff;transform:scale(1.02)}
-  button:disabled{background:var(--border-bright);color:var(--text-dim);cursor:wait}
+  .footer-input{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
+  .btn-run{background:var(--athena);color:#000;border:none;padding:15px 40px;font-family:'Syne';font-weight:800;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:0.3s;letter-spacing:1px}
+  .btn-run:hover{background:#5cdfff;transform:translateY(-2px);box-shadow:0 5px 15px rgba(0,200,255,0.3)}
+  .btn-run:disabled{background:var(--border-bright);color:var(--text-dim);cursor:not-allowed;transform:none}
 
-  .debate-arena{display:flex;flex-direction:column;gap:25px}
-  .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:30px;animation:slideIn 0.5s ease-out forwards}
+  .debate-arena{display:flex;flex-direction:column;gap:30px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:35px;position:relative;animation:cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards}
   .card-header{display:flex;align-items:center;gap:15px;margin-bottom:20px}
-  .agent-badge{width:12px;height:12px;border-radius:50%}
-  .agent-name{font-family:'Syne';font-weight:700;text-transform:uppercase;letter-spacing:1px;font-size:13px}
-  .content{line-height:1.8;font-size:15px;color:var(--text)}
+  .agent-dot{width:10px;height:10px;border-radius:50%;box-shadow:0 0 10px currentColor}
+  .agent-title{font-family:'Syne';font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:12px}
+  .card-body{line-height:1.8;font-size:15px;color:var(--text)}
 
-  .thinking{display:flex;align-items:center;gap:10px;color:var(--text-dim);font-size:12px;margin-top:20px}
-  .dot{width:4px;height:4px;background:currentColor;border-radius:50%;animation:pulse 1s infinite}
+  .thinking-box{display:flex;align-items:center;gap:12px;padding:20px;color:var(--text-dim);font-size:11px;letter-spacing:1px}
+  .loader{display:flex;gap:4px}
+  .loader-dot{width:3px;height:3px;background:currentColor;border-radius:50%;animation:blink 1.4s infinite both}
+  .loader-dot:nth-child(2){animation-delay:0.2s}
+  .loader-dot:nth-child(3){animation-delay:0.4s}
 
-  @keyframes slideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes pulse{0%,100%{opacity:0.3}50%{opacity:1}}
+  @keyframes cardIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes blink{0%,80%,100%{opacity:0}40%{opacity:1}}
 
-  .progress-container{width:150px;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
-  #progressBar{height:100%;width:0%;background:var(--athena);transition:width 0.5s}
+  .progress-bar-bg{width:200px;height:2px;background:var(--border);border-radius:1px;position:relative}
+  #progressFill{height:100%;width:0%;background:var(--athena);transition:width 0.5s ease;box-shadow:0 0 10px var(--athena)}
 </style>
 </head>
 <body>
 
 <header>
   <div class="header-content">
-    <h1>NEXUS <span>AI</span></h1>
-    <div class="progress-container"><div id="progressBar"></div></div>
+    <h1>NEXUS <span>CONSENSO</span></h1>
+    <div class="progress-bar-bg"><div id="progressFill"></div></div>
   </div>
 </header>
 
-<div class="setup-section">
-  <div class="api-field">
-    <label>Anthropic API Key</label>
-    <input type="password" id="keyAnt" placeholder="sk-ant-...">
+<div class="api-keys-grid">
+  <div class="key-box">
+    <label>Anthropic API (Claude)</label>
+    <input type="password" id="antKey" placeholder="sk-ant-...">
   </div>
-  <div class="api-field">
-    <label>Google Gemini API Key</label>
-    <input type="password" id="keyGem" placeholder="AIzaSy...">
+  <div class="key-box">
+    <label>Google Gemini API</label>
+    <input type="password" id="gemKey" placeholder="AIzaSy...">
   </div>
 </div>
 
 <main>
-  <div class="input-area">
-    <textarea id="questionInput" placeholder="Qual o desafio para o conselho de IAs?"></textarea>
-    <div class="actions">
-      <div id="statusLabel" style="font-size:11px;color:var(--text-dim)">SISTEMA PRONTO</div>
-      <button id="btnStart" onclick="startNexus()">Iniciar Rodada de Consenso</button>
+  <div class="input-wrapper">
+    <textarea id="questionInput" placeholder="Insira o dilema para as 6 IAs resolverem..."></textarea>
+    <div class="footer-input">
+      <div id="statusTxt" style="font-size:10px;color:var(--text-dim)">KERNEL IDLE</div>
+      <button class="btn-run" id="btnAction" onclick="runNexus()">Iniciar Rodada</button>
     </div>
   </div>
 
@@ -89,101 +89,96 @@
 
 <script>
 const AGENTS = {
-  athena: { name: 'Athena', color: 'var(--athena)', sys: 'Você é Athena. Foco em estratégia, lógica pura e eficiência.' },
-  prometheus: { name: 'Prometheus', color: 'var(--prometheus)', sys: 'Você é Prometheus. Foco em inovação, quebra de paradigmas e futuro.' },
-  socrates: { name: 'Socrates', color: 'var(--socrates)', sys: 'Você é Socrates. Foco em ética, dialética e questionamentos profundos.' },
-  claude: { name: 'Claude', color: 'var(--claude)', sys: 'Você é o Claude. Foco em análise técnica rigorosa e segurança.' },
-  gemini: { name: 'Gemini', color: 'var(--gemini)', sys: 'Você é o Gemini. Foco em conexões de dados e visão multicultural.' },
-  oracle: { name: 'Oracle', color: 'var(--oracle)', sys: 'Você é o Oracle. Seu objetivo é unir todos os pontos anteriores em um consenso final absoluto.' }
+  athena: { name: 'Athena', color: 'var(--athena)', sys: 'Você é Athena. Foco em estratégia e lógica pura.' },
+  prometheus: { name: 'Prometheus', color: 'var(--prometheus)', sys: 'Você é Prometheus. Foco em inovação e disrupção.' },
+  socrates: { name: 'Socrates', color: 'var(--socrates)', sys: 'Você é Socrates. Foco em ética e questionamento socrático.' },
+  claude: { name: 'Claude', color: 'var(--claude)', sys: 'Você é Claude. Foco em precisão técnica.' },
+  gemini: { name: 'Gemini', color: 'var(--gemini)', sys: 'Você é Gemini. Foco em síntese de informações globais.' },
+  oracle: { name: 'Oracle', color: 'var(--oracle)', sys: 'Você é o Oracle. Sintetize o debate em um consenso final.' }
 };
 
-async function callProxy(api, system, user) {
-  const isClaude = api === 'claude';
-  const endpoint = isClaude ? '/api/anthropic' : '/api/gemini';
-  const key = isClaude ? document.getElementById('keyAnt').value : document.getElementById('keyGem').value;
+async function callAPI(agentKey, history) {
+  const isGemini = agentKey === 'gemini' || agentKey === 'prometheus';
+  const endpoint = isGemini ? '/api/gemini' : '/api/anthropic';
+  const apiKey = isGemini ? document.getElementById('gemKey').value : document.getElementById('antKey').value;
   
-  if(!key) throw new Error(`Chave ${api.toUpperCase()} faltando.`);
+  if(!apiKey) throw new Error(`Chave para ${agentKey} não encontrada.`);
 
-  const body = isClaude ? {
+  const payload = isGemini ? {
+    contents: [{ parts: [{ text: `${AGENTS[agentKey].sys}\n\nHistórico do debate:\n${history}` }] }]
+  } : {
     model: "claude-3-haiku-20240307",
     max_tokens: 1024,
-    system: system,
-    messages: [{role: "user", content: user}]
-  } : {
-    contents: [{ parts: [{ text: `${system}\n\nContexto do Debate:\n${user}` }] }]
+    system: AGENTS[agentKey].sys,
+    messages: [{role: "user", content: `Debate atual:\n${history}`}]
   };
 
   const res = await fetch(endpoint, {
     method: 'POST',
     headers: { 
       'Content-Type': 'application/json',
-      [isClaude ? 'x-api-key' : 'x-goog-api-key']: key 
+      [isGemini ? 'x-goog-api-key' : 'x-api-key']: apiKey 
     },
-    body: JSON.stringify(body)
+    body: JSON.stringify(payload)
   });
 
   const data = await res.json();
-  if(data.error) throw new Error(data.error.message || "Erro na API");
-  
-  return isClaude ? data.content[0].text : data.candidates[0].content.parts[0].text;
+  if(data.error) throw new Error(data.error.message || "Erro API");
+  return isGemini ? data.candidates[0].content.parts[0].text : data.content[0].text;
 }
 
-function addCard(key, text) {
-  const agent = AGENTS[key];
-  const arena = document.getElementById('debateArena');
-  const div = document.createElement('div');
-  div.className = 'card';
-  div.innerHTML = `
+function createCard(key, text) {
+  const a = AGENTS[key];
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
     <div class="card-header">
-      <div class="agent-badge" style="background:${agent.color}"></div>
-      <span class="agent-name" style="color:${agent.color}">${agent.name}</span>
+      <div class="agent-dot" style="color:${a.color};background:${a.color}"></div>
+      <span class="agent-title" style="color:${a.color}">${a.name}</span>
     </div>
-    <div class="content">${text.replace(/\n/g, '<br>')}</div>
+    <div class="card-body">${text.replace(/\n/g, '<br>')}</div>
   `;
-  arena.appendChild(div);
+  document.getElementById('debateArena').appendChild(card);
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 }
 
-async function startNexus() {
-  const input = document.getElementById('questionInput');
-  const btn = document.getElementById('btnStart');
-  const bar = document.getElementById('progressBar');
-  const status = document.getElementById('statusLabel');
-  
-  if(!input.value) return;
-  
+function showThinking(name) {
+  const t = document.createElement('div');
+  t.id = 'thinking';
+  t.className = 'thinking-box';
+  t.innerHTML = `<div class="loader"><div class="loader-dot"></div><div class="loader-dot"></div><div class="loader-dot"></div></div> <span>${name} está processando...</span>`;
+  document.getElementById('debateArena').appendChild(t);
+}
+
+async function runNexus() {
+  const q = document.getElementById('questionInput').value;
+  const btn = document.getElementById('btnAction');
+  const bar = document.getElementById('progressFill');
+  if(!q) return;
+
   btn.disabled = true;
   document.getElementById('debateArena').innerHTML = '';
-  let history = [];
-  
+  let debateHistory = `Pergunta: ${q}\n`;
+
   try {
-    const sequence = ['athena', 'prometheus', 'socrates', 'claude', 'gemini'];
-    
+    const sequence = ['athena', 'prometheus', 'socrates', 'claude', 'gemini', 'oracle'];
     for(let i=0; i < sequence.length; i++) {
       const key = sequence[i];
-      status.innerText = `IA PENSANDO: ${AGENTS[key].name.toUpperCase()}...`;
+      document.getElementById('statusTxt').innerText = `EXECUTANDO: ${AGENTS[key].name.toUpperCase()}`;
+      showThinking(AGENTS[key].name);
+
+      const response = await callAPI(key, debateHistory);
       
-      const response = await callProxy(
-        (key === 'gemini' ? 'gemini' : 'claude'), 
-        AGENTS[key].sys, 
-        `Pergunta: ${input.value}\n\nHistórico:\n${history.join('\n')}`
-      );
-      
-      history.push(`[${AGENTS[key].name}]: ${response}`);
-      addCard(key, response);
+      document.getElementById('thinking').remove();
+      debateHistory += `\n[${AGENTS[key].name}]: ${response}`;
+      createCard(key, response);
       bar.style.width = `${((i+1)/6)*100}%`;
     }
-
-    // Oracle Final
-    status.innerText = "GERANDO CONSENSO FINAL...";
-    const final = await callProxy('claude', AGENTS.oracle.sys, `Resuma o debate: ${history.join('\n')}`);
-    addCard('oracle', final);
-    
-    bar.style.width = '100%';
-    status.innerText = "CONSENSO CONCLUÍDO";
+    document.getElementById('statusTxt').innerText = `CONSENSO FINALIZADO`;
   } catch(e) {
-    alert(e.message);
-    status.innerText = "ERRO NO PROCESSO";
+    alert("ERRO: " + e.message);
+    document.getElementById('statusTxt').innerText = `SISTEMA FALHOU`;
+    if(document.getElementById('thinking')) document.getElementById('thinking').remove();
   } finally {
     btn.disabled = false;
   }
